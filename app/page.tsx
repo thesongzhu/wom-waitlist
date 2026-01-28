@@ -127,27 +127,6 @@ export default function WaitlistPage() {
             <strong className="text-white/60">{count}</strong> people on the waitlist
           </p>
 
-          {/* Sign Up CTA */}
-          <div className="mt-16 p-8 rounded-2xl bg-white/[0.04] border border-white/[0.08] max-w-md mx-auto">
-            <h2 className="text-xl font-bold mb-2">Already have access?</h2>
-            <p className="text-sm text-white/40 mb-5">
-              Sign up to start matching with creators and brands.
-            </p>
-            <div className="flex gap-3 justify-center">
-              <a
-                href="https://wom-app-seven.vercel.app/register"
-                className="px-6 py-3 rounded-xl bg-white text-black font-semibold text-sm hover:bg-white/90 hover:-translate-y-0.5 transition-all"
-              >
-                Sign Up
-              </a>
-              <a
-                href="https://wom-app-seven.vercel.app/login"
-                className="px-6 py-3 rounded-xl bg-white/10 border border-white/10 text-white font-semibold text-sm hover:bg-white/15 hover:-translate-y-0.5 transition-all"
-              >
-                Log In
-              </a>
-            </div>
-          </div>
         </div>
       </main>
 
