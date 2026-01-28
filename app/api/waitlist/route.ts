@@ -19,6 +19,23 @@ export async function POST(req: NextRequest) {
     await prisma.waitlistEntry.create({ data: { email } })
     const count = await prisma.waitlistEntry.count()
 
+    // Sync to Google Sheets (fire and forget)
+    const SHEETS_URL = process.env.GOOGLE_SHEETS_SCRIPT_URL
+    if (SHEETS_URL) {
+      // Google Apps Script redirects POST→GET, so follow manually
+      fetch(SHEETS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `email=${encodeURIComponent(email)}`,
+        redirect: 'follow',
+      }).then(async (res) => {
+        // If redirected, follow with GET
+        if (!res.ok && res.url !== SHEETS_URL) {
+          await fetch(res.url)
+        }
+      }).catch(() => {}) // don't block on failure
+    }
+
     return NextResponse.json({ result: 'success', count })
   } catch (error) {
     console.error('Waitlist error:', error)
