@@ -61,7 +61,7 @@ export default function WaitlistPage() {
                 type="email"
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); setStatus('idle') }}
-                placeholder="your@email.com"
+                placeholder="Enter your email"
                 required
                 className="w-full px-6 py-4 rounded-full bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all text-base"
               />
