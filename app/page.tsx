@@ -56,19 +56,19 @@ export default function WaitlistPage() {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-            <div className="flex gap-3 sm:flex-row flex-col">
+            <div className="flex flex-col gap-4 w-full">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); setStatus('idle') }}
-                placeholder="Enter your email"
+                placeholder="your@email.com"
                 required
-                className="flex-1 px-5 py-4 rounded-xl bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all text-base"
+                className="w-full px-6 py-4 rounded-full bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all text-base"
               />
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="px-7 py-4 rounded-xl text-white font-semibold text-base hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                className="w-full py-4 rounded-full text-white font-semibold text-base hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ background: 'linear-gradient(to right, #A855F7, #EC4899)' }}
               >
                 {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
