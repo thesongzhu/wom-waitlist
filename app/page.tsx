@@ -69,7 +69,7 @@ export default function WaitlistPage() {
                 type="submit"
                 disabled={status === 'loading'}
                 className="px-7 py-4 rounded-xl text-white font-semibold text-base hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-                style={{ background: 'linear-gradient(135deg, #F59E0B, #A855F7, #EC4899)' }}
+                style={{ background: 'linear-gradient(to right, #A855F7, #EC4899)' }}
               >
                 {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
               </button>
@@ -87,23 +87,6 @@ export default function WaitlistPage() {
               )}
             </p>
           </form>
-
-          {/* Features */}
-          <div className="grid grid-cols-3 gap-4 mt-16 max-w-lg mx-auto">
-            {[
-              { icon: '🤝', label: 'Smart Matching' },
-              { icon: '📱', label: 'TikTok · IG · Reddit' },
-              { icon: '📊', label: 'Deal Tracking' },
-            ].map((f) => (
-              <div
-                key={f.label}
-                className="py-5 px-4 rounded-2xl bg-white border border-gray-200 shadow-sm text-center"
-              >
-                <div className="text-2xl mb-2">{f.icon}</div>
-                <div className="text-xs text-gray-500">{f.label}</div>
-              </div>
-            ))}
-          </div>
 
         </div>
       </main>
