@@ -92,7 +92,12 @@ export default function WaitlistPage() {
       </main>
 
       <footer className="text-center py-6 bg-gray-50 text-gray-400 text-xs">
-        &copy; 2026 WOM — Word of Mouth
+        <div className="flex justify-center gap-4 mb-2">
+          <a href="/terms" className="hover:text-gray-600 transition-colors">Terms of Service</a>
+          <span>·</span>
+          <a href="/privacy" className="hover:text-gray-600 transition-colors">Privacy Policy</a>
+        </div>
+        &copy; 2025 WOM — Word of Mouth
       </footer>
     </div>
   )
