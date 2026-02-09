@@ -13,10 +13,11 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(url, 301)
   }
 
-  // womlanding.com root → rewrite to /landing (Builder.io content)
-  if (host.includes('womlanding.com') && pathname === '/') {
-    return NextResponse.rewrite(new URL('/landing', req.url))
-  }
+  // womlanding.com root → serve the new landing page (page.tsx)
+  // Builder.io content at /landing is deprecated
+  // if (host.includes('womlanding.com') && pathname === '/') {
+  //   return NextResponse.rewrite(new URL('/landing', req.url))
+  // }
 
   return NextResponse.next()
 }
