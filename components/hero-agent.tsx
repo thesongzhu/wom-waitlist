@@ -245,9 +245,9 @@ export function HeroAgent() {
 
         <div className="agent-container">
           <div className="agent-visual">
-            <div className="ring ring-1"></div>
-            <div className="ring ring-2"></div>
-            <div className="ring ring-3"></div>
+            <div className="ring ring-1" style={{borderColor: 'rgba(232, 168, 124, 0.25)'}}></div>
+            <div className="ring ring-2" style={{borderColor: 'rgba(232, 168, 124, 0.15)'}}></div>
+            <div className="ring ring-3" style={{borderColor: 'rgba(232, 168, 124, 0.1)'}}></div>
             <div className="orb">
               <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="11" width="18" height="10" rx="2"/>
