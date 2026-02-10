@@ -3,6 +3,18 @@
 export function HeroAgent() {
   return (
     <>
+      <style jsx global>{`
+        :root {
+          --navy: #1E3A5F;
+          --navy-dark: #162C49;
+          --coral: #E8A87C;
+          --coral-light: #F5DCC8;
+          --warm-white: #FEFDFB;
+          --cream: #F5F3F0;
+          --text-secondary: #6B7A90;
+          --border: #E8E4E0;
+        }
+      `}</style>
       <style jsx>{`
         .hero {
           min-height: 100vh;
@@ -10,13 +22,13 @@ export function HeroAgent() {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(180deg, #FEFDFB 0%, #F5F3F0 100%);
+          background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
           position: relative;
           overflow: hidden;
-          padding: 60px 24px;
+          padding: 100px 24px 60px;
         }
 
-        /* Particle Orbits */
+        /* 粒子轨道 */
         .particle-orbit {
           position: absolute;
           top: 50%;
@@ -38,7 +50,7 @@ export function HeroAgent() {
           position: absolute;
           width: 6px;
           height: 6px;
-          background: #E8A87C;
+          background: var(--coral);
           border-radius: 50%;
           animation: fade 4s ease-in-out infinite;
         }
@@ -61,7 +73,6 @@ export function HeroAgent() {
         .orbit-3 .particle:nth-child(3) { bottom: 10%; right: 30%; animation-delay: 2.3s; }
         .orbit-3 .particle:nth-child(4) { bottom: 30%; left: 10%; animation-delay: 3.3s; }
 
-        /* Main Container */
         .agent-container {
           position: relative;
           z-index: 10;
@@ -80,28 +91,25 @@ export function HeroAgent() {
           margin-bottom: 48px;
         }
 
-        /* Rings - Coral color */
         .ring {
           position: absolute;
           border-radius: 50%;
-          border: 1.5px solid #E8A87C;
-          opacity: 0.25;
+          border: 1.5px solid rgba(232, 168, 124, 0.25);
           animation: ring-pulse 6s ease-in-out infinite;
         }
         .ring-1 { width: 220px; height: 220px; }
-        .ring-2 { width: 280px; height: 280px; animation-delay: 0.5s; opacity: 0.15; }
-        .ring-3 { width: 340px; height: 340px; animation-delay: 1s; opacity: 0.1; }
+        .ring-2 { width: 280px; height: 280px; animation-delay: 0.5s; border-color: rgba(232, 168, 124, 0.15); }
+        .ring-3 { width: 340px; height: 340px; animation-delay: 1s; border-color: rgba(232, 168, 124, 0.1); }
 
         @keyframes ring-pulse {
           0%, 100% { transform: scale(1); opacity: 1; }
           50% { transform: scale(1.02); opacity: 0.7; }
         }
 
-        /* Orb - Breathing Animation */
         .orb {
           width: 160px;
           height: 160px;
-          background: linear-gradient(135deg, #1E3A5F 0%, #162C49 100%);
+          background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -112,40 +120,34 @@ export function HeroAgent() {
         }
 
         @keyframes breathe {
-          0%, 100% { 
+          0%, 100% {
             transform: scale(1);
-            box-shadow: 
-              0 0 40px rgba(232, 168, 124, 0.3),
-              0 0 80px rgba(232, 168, 124, 0.2);
+            box-shadow: 0 0 40px rgba(232, 168, 124, 0.3), 0 0 80px rgba(232, 168, 124, 0.2);
           }
-          50% { 
+          50% {
             transform: scale(1.05);
-            box-shadow: 
-              0 0 80px rgba(232, 168, 124, 0.5),
-              0 0 150px rgba(232, 168, 124, 0.3),
-              0 0 200px rgba(232, 168, 124, 0.15);
+            box-shadow: 0 0 80px rgba(232, 168, 124, 0.5), 0 0 150px rgba(232, 168, 124, 0.3), 0 0 200px rgba(232, 168, 124, 0.15);
           }
         }
 
         .icon {
           width: 56px;
           height: 56px;
-          color: #E8A87C;
+          color: var(--coral);
           animation: icon-breathe 6s ease-in-out infinite;
         }
 
         @keyframes icon-breathe {
-          0%, 100% { 
+          0%, 100% {
             filter: drop-shadow(0 0 8px rgba(232, 168, 124, 0.5));
             transform: scale(1);
           }
-          50% { 
+          50% {
             filter: drop-shadow(0 0 25px rgba(232, 168, 124, 1));
             transform: scale(1.08);
           }
         }
 
-        /* Content */
         .content {
           text-align: center;
           max-width: 600px;
@@ -156,17 +158,17 @@ export function HeroAgent() {
           font-weight: 800;
           line-height: 1.1;
           margin-bottom: 20px;
-          letter-spacing: -0.02em;
-          color: #1E3A5F;
           white-space: nowrap;
+          color: var(--navy);
         }
-        .title span {
-          color: #E8A87C;
+
+        .title-highlight {
+          color: var(--coral);
         }
 
         .subtitle {
           font-size: 1.25rem;
-          color: #6B7A90;
+          color: var(--text-secondary);
           margin-bottom: 32px;
           line-height: 1.7;
         }
@@ -175,7 +177,7 @@ export function HeroAgent() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          background: #1E3A5F;
+          background: var(--navy);
           color: white;
           padding: 18px 36px;
           border-radius: 12px;
@@ -184,6 +186,7 @@ export function HeroAgent() {
           text-decoration: none;
           transition: all 0.3s ease;
         }
+
         .cta:hover {
           transform: translateY(-2px);
           box-shadow: 0 12px 40px rgba(30, 58, 95, 0.25);
@@ -192,7 +195,7 @@ export function HeroAgent() {
         .scroll-indicator {
           position: absolute;
           bottom: 30px;
-          color: #6B7A90;
+          color: var(--text-secondary);
           font-size: 0.875rem;
           display: flex;
           flex-direction: column;
@@ -206,9 +209,11 @@ export function HeroAgent() {
           50% { transform: translateY(5px); }
         }
 
+        @media (max-width: 900px) {
+          .title { font-size: 2.5rem; white-space: normal; }
+        }
+
         @media (max-width: 768px) {
-          .title { font-size: 2.5rem; }
-          .subtitle { font-size: 1rem; }
           .orb { width: 120px; height: 120px; }
           .icon { width: 44px; height: 44px; }
           .ring-1 { width: 180px; height: 180px; }
@@ -219,7 +224,6 @@ export function HeroAgent() {
       `}</style>
 
       <section className="hero">
-        {/* Particle Orbits */}
         <div className="particle-orbit orbit-1">
           <div className="particle"></div>
           <div className="particle"></div>
@@ -256,7 +260,7 @@ export function HeroAgent() {
           </div>
 
           <div className="content">
-            <h1 className="title">Your <span>AI Marketing</span> Agent</h1>
+            <h1 className="title">Your <span className="title-highlight">AI Marketing</span> Agent</h1>
             <p className="subtitle">WOM runs creator campaigns for you.<br/>Brand voice. Right creators. Zero manual ops.</p>
             <a href="https://wom.live/login" className="cta">
               Get Started
@@ -268,10 +272,7 @@ export function HeroAgent() {
         </div>
 
         <div className="scroll-indicator">
-          Scroll to explore
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 5v14M5 12l7 7 7-7"/>
-          </svg>
+          Scroll to explore ↓
         </div>
       </section>
     </>
