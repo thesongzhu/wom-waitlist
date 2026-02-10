@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WOM - Hero Variant: 🧠 Brain</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1E3A5F;
+      --navy-light: #2D4A6F;
+      --navy-dark: #162C49;
+      --coral: #E8A87C;
+      --coral-light: #F5DCC8;
+      --cream: #F5F3F0;
+      --warm-white: #FEFDFB;
+      --text-secondary: #6B7A90;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--warm-white);
+      color: var(--navy);
+      line-height: 1.6;
+    }
+
+    .hero-agent {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
+      overflow: hidden;
+      padding: 80px 24px 60px;
+    }
+
+    .particles-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    .agent-container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .agent-visual {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .glow-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 2px solid rgba(232, 168, 124, 0.3);
+      animation: pulse-ring 4s ease-in-out infinite;
+    }
+
+    .glow-ring-1 { width: 280px; height: 280px; animation-delay: 0s; }
+    .glow-ring-2 { width: 340px; height: 340px; animation-delay: 0.5s; border-color: rgba(232, 168, 124, 0.2); }
+    .glow-ring-3 { width: 400px; height: 400px; animation-delay: 1s; border-color: rgba(232, 168, 124, 0.1); }
+
+    @keyframes pulse-ring {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.6; }
+    }
+
+    .agent-orb {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+      box-shadow: 
+        0 0 60px rgba(30, 58, 95, 0.4),
+        0 0 100px rgba(232, 168, 124, 0.2),
+        inset 0 0 40px rgba(0, 0, 0, 0.2);
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 60px rgba(30, 58, 95, 0.4), 0 0 100px rgba(232, 168, 124, 0.2), inset 0 0 40px rgba(0, 0, 0, 0.2);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.08);
+        box-shadow: 0 0 80px rgba(30, 58, 95, 0.5), 0 0 140px rgba(232, 168, 124, 0.35), inset 0 0 50px rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    .agent-inner {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232, 168, 124, 0.6) 0%, rgba(232, 168, 124, 0) 70%);
+      animation: inner-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes inner-glow {
+      0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    }
+
+    .agent-emoji {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
+      animation: icon-pulse 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(232, 168, 124, 0.5));
+    }
+
+    @keyframes icon-pulse {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 1; }
+    }
+
+    .hero-content { text-align: center; max-width: 700px; }
+
+    .hero-title {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--navy);
+      margin-bottom: 24px;
+    }
+
+    .hero-title-accent {
+      background: linear-gradient(135deg, var(--coral) 0%, #D4956A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 36px;
+      background: var(--navy);
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(30, 58, 95, 0.25);
+    }
+
+    .hero-cta:hover {
+      background: var(--navy-light);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(30, 58, 95, 0.35);
+    }
+
+    @media (max-width: 768px) {
+      .hero-agent { padding: 100px 20px 80px; }
+      .agent-visual { width: 160px; height: 160px; }
+      .agent-orb { width: 120px; height: 120px; }
+      .agent-inner { width: 60px; height: 60px; }
+      .agent-emoji { font-size: 36px; }
+      .glow-ring-1 { width: 200px; height: 200px; }
+      .glow-ring-2 { width: 250px; height: 250px; }
+      .glow-ring-3 { width: 300px; height: 300px; }
+      .hero-title { font-size: 36px; }
+      .hero-subtitle { font-size: 17px; }
+      .hero-cta { padding: 16px 28px; font-size: 16px; }
+      .agent-container { gap: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero-agent">
+    <canvas id="particles-canvas" class="particles-canvas"></canvas>
+    <div class="agent-container">
+      <div class="agent-visual">
+        <div class="glow-ring glow-ring-3"></div>
+        <div class="glow-ring glow-ring-2"></div>
+        <div class="glow-ring glow-ring-1"></div>
+        <div class="agent-orb"></div>
+        <div class="agent-inner"></div>
+        <div class="agent-emoji">🧠</div>
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">Your <span class="hero-title-accent">AI Marketing</span> Agent</h1>
+        <p class="hero-subtitle">WOM runs creator campaigns on autopilot—from outreach to payment, 24/7.</p>
+        <a href="https://wom.live/login" class="hero-cta">
+          Get Started
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+  <script>
+    (function() {
+      const canvas = document.getElementById('particles-canvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      function resize() {
+        canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+        canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        initParticles();
+      }
+      function initParticles() {
+        particles = [];
+        const count = Math.min(40, Math.floor(canvas.offsetWidth / 25));
+        const centerX = canvas.offsetWidth / 2;
+        const centerY = canvas.offsetHeight / 2;
+        const radius = Math.min(centerX, centerY) * 0.6;
+        for (let i = 0; i < count; i++) {
+          const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
+          const dist = radius * (0.6 + Math.random() * 0.8);
+          particles.push({ x: centerX + Math.cos(angle) * dist, y: centerY + Math.sin(angle) * dist, vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3, size: 2 + Math.random() * 2, alpha: 0.3 + Math.random() * 0.4 });
+        }
+      }
+      function animate() {
+        ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+        const centerX = canvas.offsetWidth / 2;
+        const centerY = canvas.offsetHeight / 2;
+        const maxDist = Math.min(centerX, centerY) * 1.2;
+        particles.forEach((p, i) => {
+          const dx = centerX - p.x, dy = centerY - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist > maxDist) { p.vx += dx * 0.001; p.vy += dy * 0.001; }
+          else if (dist < maxDist * 0.3) { p.vx -= dx * 0.0005; p.vy -= dy * 0.0005; }
+          const angle = Math.atan2(dy, dx);
+          p.vx += Math.sin(angle) * 0.01; p.vy -= Math.cos(angle) * 0.01;
+          p.x += p.vx; p.y += p.vy; p.vx *= 0.99; p.vy *= 0.99;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(232, 168, 124, ${p.alpha})`; ctx.fill();
+          particles.forEach((p2, j) => {
+            if (i >= j) return;
+            const dx2 = p.x - p2.x, dy2 = p.y - p2.y;
+            const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+            if (dist2 < 100) {
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(232, 168, 124, ${0.15 * (1 - dist2 / 100)})`; ctx.lineWidth = 1; ctx.stroke();
+            }
+          });
+        });
+        requestAnimationFrame(animate);
+      }
+      resize(); animate();
+      window.addEventListener('resize', resize);
+    })();
+  </script>
+</body>
+</html>

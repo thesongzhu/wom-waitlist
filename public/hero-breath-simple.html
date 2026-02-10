@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WOM - Breathing Glow 🌍</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1E3A5F;
+      --navy-light: #2D4A6F;
+      --navy-dark: #162C49;
+      --coral: #E8A87C;
+      --coral-light: #F5DCC8;
+      --cream: #F5F3F0;
+      --warm-white: #FEFDFB;
+      --text-secondary: #6B7A90;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--warm-white);
+      color: var(--navy);
+      line-height: 1.6;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
+      padding: 80px 24px 60px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+    }
+
+    /* ========== Breathing Orb ========== */
+    .orb-wrapper {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .orb {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 
+          0 0 30px rgba(232, 168, 124, 0.3),
+          0 0 60px rgba(232, 168, 124, 0.2),
+          inset 0 0 40px rgba(232, 168, 124, 0.15);
+      }
+      50% {
+        transform: scale(1.08);
+        box-shadow: 
+          0 0 50px rgba(232, 168, 124, 0.5),
+          0 0 100px rgba(232, 168, 124, 0.3),
+          0 0 150px rgba(232, 168, 124, 0.1),
+          inset 0 0 60px rgba(232, 168, 124, 0.25);
+      }
+    }
+
+    .orb-inner {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232, 168, 124, 0.5) 0%, transparent 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: inner-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes inner-glow {
+      0%, 100% { 
+        opacity: 0.8; 
+        transform: scale(1); 
+      }
+      50% { 
+        opacity: 1; 
+        transform: scale(1.15); 
+      }
+    }
+
+    .emoji {
+      font-size: 48px;
+      filter: drop-shadow(0 0 12px rgba(232, 168, 124, 0.6));
+      animation: emoji-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes emoji-glow {
+      0%, 100% { 
+        filter: drop-shadow(0 0 8px rgba(232, 168, 124, 0.4));
+      }
+      50% { 
+        filter: drop-shadow(0 0 16px rgba(232, 168, 124, 0.7));
+      }
+    }
+
+    /* ========== Content ========== */
+    .content {
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .title {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--navy);
+      margin-bottom: 24px;
+    }
+
+    .title-accent {
+      background: linear-gradient(135deg, var(--coral) 0%, #D4956A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 36px;
+      background: var(--navy);
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(30, 58, 95, 0.25);
+    }
+
+    .cta:hover {
+      background: var(--navy-light);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(30, 58, 95, 0.35);
+    }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 768px) {
+      .hero { padding: 100px 20px 80px; }
+      .container { gap: 36px; }
+      .orb-wrapper { width: 160px; height: 160px; }
+      .orb { width: 120px; height: 120px; }
+      .orb-inner { width: 60px; height: 60px; }
+      .emoji { font-size: 36px; }
+      .title { font-size: 36px; }
+      .subtitle { font-size: 17px; }
+      .cta { padding: 16px 28px; font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="container">
+      <!-- Simple breathing orb with glow -->
+      <div class="orb-wrapper">
+        <div class="orb">
+          <div class="orb-inner">
+            <span class="emoji">🌍</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+        <h1 class="title">Your <span class="title-accent">AI Marketing</span> Agent</h1>
+        <p class="subtitle">WOM runs creator campaigns on autopilot—from outreach to payment, 24/7.</p>
+        <a href="https://wom.live/login" class="cta">
+          Get Started
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

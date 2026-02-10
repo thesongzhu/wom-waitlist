@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Emoji 5 - Target</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #FEFDFB;
+      font-family: 'Inter', sans-serif;
+    }
+    .orb {
+      width: 160px;
+      height: 160px;
+      background: linear-gradient(135deg, #1E3A5F 0%, #162C49 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 60px rgba(232, 168, 124, 0.4);
+      animation: breathe 4s ease-in-out infinite;
+      position: relative;
+    }
+    .orb::before {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, rgba(232, 168, 124, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .icon {
+      color: #E8A87C;
+      font-size: 48px;
+      filter: drop-shadow(0 0 12px rgba(232, 168, 124, 0.8));
+      z-index: 1;
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 60px rgba(232, 168, 124, 0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 0 100px rgba(232, 168, 124, 0.5); }
+    }
+    .label { margin-top: 24px; color: #1E3A5F; font-size: 18px; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div style="text-align: center;">
+    <div class="orb">
+      <svg class="icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <circle cx="12" cy="12" r="6"/>
+        <circle cx="12" cy="12" r="2"/>
+      </svg>
+    </div>
+    <div class="label">Target - Goals</div>
+  </div>
+</body>
+</html>

@@ -80,16 +80,17 @@ export function HeroAgent() {
           margin-bottom: 48px;
         }
 
-        /* Rings */
+        /* Rings - Coral color */
         .ring {
           position: absolute;
           border-radius: 50%;
-          border: 1.5px solid rgba(232, 168, 124, 0.25);
+          border: 1.5px solid #E8A87C;
+          opacity: 0.25;
           animation: ring-pulse 6s ease-in-out infinite;
         }
         .ring-1 { width: 220px; height: 220px; }
-        .ring-2 { width: 280px; height: 280px; animation-delay: 0.5s; border-color: rgba(232, 168, 124, 0.15); }
-        .ring-3 { width: 340px; height: 340px; animation-delay: 1s; border-color: rgba(232, 168, 124, 0.1); }
+        .ring-2 { width: 280px; height: 280px; animation-delay: 0.5s; opacity: 0.15; }
+        .ring-3 { width: 340px; height: 340px; animation-delay: 1s; opacity: 0.1; }
 
         @keyframes ring-pulse {
           0%, 100% { transform: scale(1); opacity: 1; }
@@ -156,10 +157,11 @@ export function HeroAgent() {
           line-height: 1.1;
           margin-bottom: 20px;
           letter-spacing: -0.02em;
-          color: var(--navy);
+          color: #1E3A5F;
+          white-space: nowrap;
         }
         .title span {
-          color: var(--coral);
+          color: #E8A87C;
         }
 
         .subtitle {

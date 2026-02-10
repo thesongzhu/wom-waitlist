@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WOM - AI Agent Hero | Arc Reactor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1E3A5F;
+      --navy-light: #2D4A6F;
+      --navy-dark: #0D1B2A;
+      --coral: #E8A87C;
+      --cyan: #00D4FF;
+      --cyan-dim: #0099CC;
+      --electric-blue: #4A9EFF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--navy-dark);
+      color: white;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at center, #162C49 0%, var(--navy-dark) 70%);
+      overflow: hidden;
+    }
+
+    /* Grid background */
+    .grid-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: grid-move 20s linear infinite;
+    }
+
+    @keyframes grid-move {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(60px, 60px); }
+    }
+
+    /* Scanlines overlay */
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.1) 4px
+      );
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+    }
+
+    /* Arc Reactor Container */
+    .arc-reactor {
+      position: relative;
+      width: 320px;
+      height: 320px;
+    }
+
+    /* Outer rotating ring */
+    .ring-outer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300px;
+      height: 300px;
+      transform: translate(-50%, -50%);
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      border-radius: 50%;
+      animation: rotate-slow 20s linear infinite;
+    }
+
+    .ring-outer::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan);
+    }
+
+    .ring-outer::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan);
+    }
+
+    /* Middle rotating ring - reverse */
+    .ring-middle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 240px;
+      height: 240px;
+      transform: translate(-50%, -50%);
+      border: 3px solid transparent;
+      border-top: 3px solid var(--cyan);
+      border-bottom: 3px solid var(--cyan);
+      border-radius: 50%;
+      animation: rotate-reverse 12s linear infinite;
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+    }
+
+    /* Inner rotating ring */
+    .ring-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 180px;
+      height: 180px;
+      transform: translate(-50%, -50%);
+      border: 2px dashed rgba(0, 212, 255, 0.4);
+      border-radius: 50%;
+      animation: rotate-slow 8s linear infinite;
+    }
+
+    /* Arc segments */
+    .arc-segment {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      transform: translate(-50%, -50%);
+    }
+
+    .arc-segment::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 30px;
+      background: linear-gradient(to bottom, var(--cyan), transparent);
+      border-radius: 2px;
+    }
+
+    .arc-segment:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg); }
+    .arc-segment:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg); }
+    .arc-segment:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg); }
+    .arc-segment:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg); }
+    .arc-segment:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg); }
+    .arc-segment:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg); }
+    .arc-segment:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg); }
+
+    /* Core */
+    .core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120px;
+      height: 120px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, 
+        rgba(0, 212, 255, 0.8) 0%, 
+        rgba(0, 153, 204, 0.4) 40%,
+        rgba(30, 58, 95, 0.8) 70%,
+        var(--navy) 100%
+      );
+      box-shadow: 
+        0 0 60px rgba(0, 212, 255, 0.6),
+        0 0 120px rgba(0, 212, 255, 0.4),
+        inset 0 0 40px rgba(0, 212, 255, 0.3);
+      animation: core-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes core-pulse {
+      0%, 100% {
+        box-shadow: 
+          0 0 60px rgba(0, 212, 255, 0.6),
+          0 0 120px rgba(0, 212, 255, 0.4),
+          inset 0 0 40px rgba(0, 212, 255, 0.3);
+      }
+      50% {
+        box-shadow: 
+          0 0 80px rgba(0, 212, 255, 0.8),
+          0 0 160px rgba(0, 212, 255, 0.5),
+          inset 0 0 60px rgba(0, 212, 255, 0.4);
+      }
+    }
+
+    /* Inner core triangular element */
+    .core-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50px;
+      height: 50px;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, var(--coral) 0%, #D4956A 100%);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: core-inner-glow 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px var(--coral));
+    }
+
+    @keyframes core-inner-glow {
+      0%, 100% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* Energy pulse rings */
+    .energy-pulse {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120px;
+      height: 120px;
+      border: 2px solid var(--cyan);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: energy-expand 3s ease-out infinite;
+      opacity: 0;
+    }
+
+    .energy-pulse:nth-child(2) { animation-delay: 1s; }
+    .energy-pulse:nth-child(3) { animation-delay: 2s; }
+
+    @keyframes energy-expand {
+      0% {
+        width: 120px;
+        height: 120px;
+        opacity: 0.8;
+      }
+      100% {
+        width: 400px;
+        height: 400px;
+        opacity: 0;
+      }
+    }
+
+    @keyframes rotate-slow {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes rotate-reverse {
+      from { transform: translate(-50%, -50%) rotate(360deg); }
+      to { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+
+    /* Floating data points */
+    .data-points {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .data-point {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--cyan);
+      animation: float-point 4s ease-in-out infinite;
+    }
+
+    .data-point:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+    .data-point:nth-child(2) { top: 30%; right: 20%; animation-delay: 0.5s; }
+    .data-point:nth-child(3) { bottom: 25%; left: 25%; animation-delay: 1s; }
+    .data-point:nth-child(4) { bottom: 35%; right: 15%; animation-delay: 1.5s; }
+    .data-point:nth-child(5) { top: 15%; left: 40%; animation-delay: 2s; }
+    .data-point:nth-child(6) { bottom: 20%; right: 35%; animation-delay: 2.5s; }
+
+    @keyframes float-point {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+      50% { transform: translateY(-20px) scale(1.5); opacity: 1; }
+    }
+
+    /* Hero content */
+    .hero-content {
+      text-align: center;
+      max-width: 700px;
+      padding: 0 24px;
+    }
+
+    .hero-title {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+    }
+
+    .hero-title-accent {
+      background: linear-gradient(135deg, var(--coral) 0%, #FFB88C 50%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 36px;
+      background: linear-gradient(135deg, var(--cyan-dim) 0%, var(--electric-blue) 100%);
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 4px 20px rgba(0, 212, 255, 0.3),
+        0 0 40px rgba(0, 212, 255, 0.2);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 
+        0 8px 30px rgba(0, 212, 255, 0.5),
+        0 0 60px rgba(0, 212, 255, 0.3);
+    }
+
+    .hero-cta svg {
+      transition: transform 0.3s ease;
+    }
+
+    .hero-cta:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Holographic flicker effect */
+    @keyframes holo-flicker {
+      0%, 100% { opacity: 1; }
+      92% { opacity: 1; }
+      93% { opacity: 0.8; }
+      94% { opacity: 1; }
+      95% { opacity: 0.9; }
+      96% { opacity: 1; }
+    }
+
+    .container {
+      animation: holo-flicker 8s infinite;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .arc-reactor {
+        width: 240px;
+        height: 240px;
+      }
+
+      .ring-outer { width: 220px; height: 220px; }
+      .ring-middle { width: 180px; height: 180px; }
+      .ring-inner { width: 140px; height: 140px; }
+      .arc-segment { width: 160px; height: 160px; }
+      .core { width: 90px; height: 90px; }
+      .core-inner { width: 36px; height: 36px; }
+
+      .hero-title { font-size: 36px; }
+      .hero-subtitle { font-size: 17px; }
+      .hero-cta { padding: 16px 28px; font-size: 16px; }
+      .container { gap: 40px; }
+
+      @keyframes energy-expand {
+        0% { width: 90px; height: 90px; opacity: 0.8; }
+        100% { width: 300px; height: 300px; opacity: 0; }
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="grid-bg"></div>
+    <div class="scanlines"></div>
+
+    <!-- Floating data points -->
+    <div class="data-points">
+      <div class="data-point"></div>
+      <div class="data-point"></div>
+      <div class="data-point"></div>
+      <div class="data-point"></div>
+      <div class="data-point"></div>
+      <div class="data-point"></div>
+    </div>
+
+    <div class="container">
+      <!-- Arc Reactor Visual -->
+      <div class="arc-reactor">
+        <!-- Energy pulses -->
+        <div class="energy-pulse"></div>
+        <div class="energy-pulse"></div>
+        <div class="energy-pulse"></div>
+
+        <!-- Rotating rings -->
+        <div class="ring-outer"></div>
+        <div class="ring-middle"></div>
+        <div class="ring-inner"></div>
+
+        <!-- Arc segments -->
+        <div class="arc-segment"></div>
+        <div class="arc-segment"></div>
+        <div class="arc-segment"></div>
+        <div class="arc-segment"></div>
+        <div class="arc-segment"></div>
+        <div class="arc-segment"></div>
+        <div class="arc-segment"></div>
+        <div class="arc-segment"></div>
+
+        <!-- Core -->
+        <div class="core"></div>
+        <div class="core-inner"></div>
+      </div>
+
+      <!-- Text Content -->
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Your <span class="hero-title-accent">AI Marketing</span> Agent
+        </h1>
+        <p class="hero-subtitle">
+          WOM runs creator campaigns on autopilot—from outreach to payment, 24/7.
+        </p>
+        <a href="https://wom.live/login" class="hero-cta">
+          Get Started
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

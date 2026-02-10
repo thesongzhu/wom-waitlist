@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Variant B - 双层光晕呼吸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1E3A5F;
+      --navy-dark: #162C49;
+      --coral: #E8A87C;
+      --warm-white: #FEFDFB;
+      --cream: #F5F3F0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--warm-white); }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%); }
+    .label { position: fixed; top: 20px; left: 20px; background: var(--navy); color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; }
+    .desc { position: fixed; top: 20px; right: 20px; background: rgba(0,0,0,0.05); padding: 12px 24px; border-radius: 8px; max-width: 300px; font-size: 14px; }
+    
+    .orb-container { position: relative; width: 200px; height: 200px; }
+    
+    .orb {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 160px;
+      height: 160px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: breathe 5s ease-in-out infinite;
+      z-index: 10;
+    }
+    
+    /* B: 双层光晕 - 内外两层同步呼吸 */
+    .glow-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(232, 168, 124, 0.5) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: glow-in 5s ease-in-out infinite;
+      z-index: 5;
+    }
+    
+    .glow-outer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(232, 168, 124, 0.3) 0%, transparent 60%);
+      border-radius: 50%;
+      animation: glow-out 5s ease-in-out infinite;
+      z-index: 4;
+    }
+    
+    @keyframes breathe {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 60px rgba(232, 168, 124, 0.25); }
+      50% { transform: translate(-50%, -50%) scale(1.04); box-shadow: 0 0 100px rgba(232, 168, 124, 0.4); }
+    }
+    
+    @keyframes glow-in {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+      50% { transform: translate(-50%, -50%) scale(1.8); opacity: 0.9; }
+    }
+    
+    @keyframes glow-out {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+      50% { transform: translate(-50%, -50%) scale(2.5); opacity: 0.7; }
+    }
+    
+    .icon {
+      width: 56px;
+      height: 56px;
+      color: var(--coral);
+      filter: drop-shadow(0 0 15px rgba(232, 168, 124, 0.8));
+      z-index: 11;
+      animation: icon-glow 5s ease-in-out infinite;
+    }
+    
+    @keyframes icon-glow {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(232, 168, 124, 0.6)); }
+      50% { filter: drop-shadow(0 0 30px rgba(232, 168, 124, 1)); }
+    }
+    
+    .content { text-align: center; margin-top: 48px; }
+    .title { font-size: 3rem; font-weight: 800; color: var(--navy); }
+    .title span { color: var(--coral); font-style: italic; }
+  </style>
+</head>
+<body>
+  <div class="label">B</div>
+  <div class="desc">双层光晕呼吸<br>内外两层同步扩散收回</div>
+  <section class="hero">
+    <div class="orb-container">
+      <div class="glow-outer"></div>
+      <div class="glow-inner"></div>
+      <div class="orb">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="10" rx="2"/>
+          <circle cx="12" cy="5" r="2"/>
+          <path d="M12 7v4"/>
+          <circle cx="8" cy="16" r="1" fill="currentColor"/>
+          <circle cx="16" cy="16" r="1" fill="currentColor"/>
+        </svg>
+      </div>
+    </div>
+    <div class="content">
+      <h1 class="title">Your <span>AI Marketing</span> Agent</h1>
+    </div>
+  </section>
+</body>
+</html>

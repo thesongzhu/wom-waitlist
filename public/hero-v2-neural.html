@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WOM - AI Agent Hero | Neural Network</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1E3A5F;
+      --navy-dark: #0D1B2A;
+      --coral: #E8A87C;
+      --cyan: #00D4FF;
+      --cyan-dim: #0099CC;
+      --electric-blue: #4A9EFF;
+      --purple: #8B5CF6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--navy-dark);
+      color: white;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at center, #162C49 0%, var(--navy-dark) 70%);
+      overflow: hidden;
+    }
+
+    /* Neural network canvas */
+    .neural-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Subtle grid */
+    .grid-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at center, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.5;
+    }
+
+    /* Scanlines */
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.1) 4px
+      );
+      pointer-events: none;
+      opacity: 0.2;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+    }
+
+    /* Neural core */
+    .neural-core {
+      position: relative;
+      width: 320px;
+      height: 320px;
+    }
+
+    /* Central brain orb */
+    .brain-orb {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 140px;
+      height: 140px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%,
+        rgba(0, 212, 255, 0.4) 0%,
+        rgba(139, 92, 246, 0.3) 40%,
+        rgba(30, 58, 95, 0.8) 70%,
+        var(--navy) 100%
+      );
+      box-shadow: 
+        0 0 60px rgba(0, 212, 255, 0.4),
+        0 0 120px rgba(139, 92, 246, 0.2),
+        inset 0 0 40px rgba(0, 212, 255, 0.2);
+      animation: brain-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes brain-pulse {
+      0%, 100% {
+        box-shadow: 
+          0 0 60px rgba(0, 212, 255, 0.4),
+          0 0 120px rgba(139, 92, 246, 0.2),
+          inset 0 0 40px rgba(0, 212, 255, 0.2);
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        box-shadow: 
+          0 0 80px rgba(0, 212, 255, 0.6),
+          0 0 160px rgba(139, 92, 246, 0.3),
+          inset 0 0 60px rgba(0, 212, 255, 0.3);
+        transform: translate(-50%, -50%) scale(1.05);
+      }
+    }
+
+    /* Inner core */
+    .inner-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60px;
+      height: 60px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--coral) 0%, rgba(232, 168, 124, 0.4) 70%, transparent 100%);
+      box-shadow: 0 0 40px var(--coral), 0 0 80px rgba(232, 168, 124, 0.4);
+      animation: inner-pulse 3s ease-in-out infinite 0.5s;
+    }
+
+    @keyframes inner-pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    }
+
+    /* Orbiting neurons */
+    .orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px dashed rgba(0, 212, 255, 0.2);
+      border-radius: 50%;
+    }
+
+    .orbit-1 {
+      width: 200px;
+      height: 200px;
+      animation: orbit-spin 15s linear infinite;
+    }
+
+    .orbit-2 {
+      width: 260px;
+      height: 260px;
+      animation: orbit-spin 20s linear infinite reverse;
+    }
+
+    .orbit-3 {
+      width: 320px;
+      height: 320px;
+      animation: orbit-spin 25s linear infinite;
+    }
+
+    @keyframes orbit-spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Neuron nodes on orbits */
+    .neuron {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--cyan), 0 0 40px rgba(0, 212, 255, 0.5);
+      animation: neuron-blink 2s ease-in-out infinite;
+    }
+
+    .neuron::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 24px;
+      height: 24px;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 50%;
+      animation: neuron-ring 2s ease-out infinite;
+    }
+
+    @keyframes neuron-blink {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    @keyframes neuron-ring {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+    }
+
+    /* Position neurons */
+    .orbit-1 .neuron:nth-child(1) { top: -6px; left: 50%; transform: translateX(-50%); }
+    .orbit-1 .neuron:nth-child(2) { bottom: -6px; left: 50%; transform: translateX(-50%); animation-delay: 0.5s; }
+    .orbit-1 .neuron:nth-child(3) { left: -6px; top: 50%; transform: translateY(-50%); animation-delay: 1s; }
+
+    .orbit-2 .neuron:nth-child(1) { top: 20%; right: -6px; animation-delay: 0.3s; }
+    .orbit-2 .neuron:nth-child(2) { bottom: 20%; left: -6px; animation-delay: 0.8s; }
+    .orbit-2 .neuron:nth-child(3) { top: -6px; left: 30%; animation-delay: 1.3s; }
+    .orbit-2 .neuron:nth-child(4) { bottom: -6px; right: 30%; animation-delay: 1.6s; }
+
+    .orbit-3 .neuron:nth-child(1) { top: 10%; left: -6px; animation-delay: 0.2s; }
+    .orbit-3 .neuron:nth-child(2) { top: -6px; right: 25%; animation-delay: 0.7s; }
+    .orbit-3 .neuron:nth-child(3) { bottom: 15%; right: -6px; animation-delay: 1.2s; }
+    .orbit-3 .neuron:nth-child(4) { bottom: -6px; left: 25%; animation-delay: 1.7s; }
+    .orbit-3 .neuron:nth-child(5) { top: 50%; right: -6px; animation-delay: 0.4s; }
+
+    /* Synaptic connections (drawn via CSS) */
+    .synapse {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--cyan), transparent);
+      transform-origin: top center;
+      opacity: 0.3;
+      animation: synapse-fire 3s ease-in-out infinite;
+    }
+
+    .synapse-1 { height: 100px; transform: translate(-50%, -70px) rotate(0deg); animation-delay: 0s; }
+    .synapse-2 { height: 130px; transform: translate(-50%, -70px) rotate(45deg); animation-delay: 0.5s; }
+    .synapse-3 { height: 100px; transform: translate(-50%, -70px) rotate(90deg); animation-delay: 1s; }
+    .synapse-4 { height: 130px; transform: translate(-50%, -70px) rotate(135deg); animation-delay: 1.5s; }
+    .synapse-5 { height: 100px; transform: translate(-50%, -70px) rotate(180deg); animation-delay: 2s; }
+    .synapse-6 { height: 130px; transform: translate(-50%, -70px) rotate(225deg); animation-delay: 2.5s; }
+    .synapse-7 { height: 100px; transform: translate(-50%, -70px) rotate(270deg); animation-delay: 0.7s; }
+    .synapse-8 { height: 130px; transform: translate(-50%, -70px) rotate(315deg); animation-delay: 1.2s; }
+
+    @keyframes synapse-fire {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.6; }
+    }
+
+    /* Floating data particles */
+    .particle-field {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Hero content */
+    .hero-content {
+      text-align: center;
+      max-width: 700px;
+      padding: 0 24px;
+    }
+
+    .hero-title {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+    }
+
+    .hero-title-accent {
+      background: linear-gradient(135deg, var(--coral) 0%, var(--purple) 50%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 36px;
+      background: linear-gradient(135deg, var(--cyan-dim) 0%, var(--purple) 100%);
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 4px 20px rgba(139, 92, 246, 0.3),
+        0 0 40px rgba(0, 212, 255, 0.2);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 
+        0 8px 30px rgba(139, 92, 246, 0.5),
+        0 0 60px rgba(0, 212, 255, 0.3);
+    }
+
+    .hero-cta svg {
+      transition: transform 0.3s ease;
+    }
+
+    .hero-cta:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Neural flicker */
+    @keyframes neural-flicker {
+      0%, 100% { opacity: 1; }
+      97% { opacity: 1; }
+      97.5% { opacity: 0.7; }
+      98% { opacity: 1; }
+      99% { opacity: 0.85; }
+    }
+
+    .neural-core {
+      animation: neural-flicker 10s infinite;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .neural-core { width: 240px; height: 240px; }
+      .brain-orb { width: 100px; height: 100px; }
+      .inner-core { width: 40px; height: 40px; }
+      .orbit-1 { width: 150px; height: 150px; }
+      .orbit-2 { width: 190px; height: 190px; }
+      .orbit-3 { width: 230px; height: 230px; }
+      .neuron { width: 8px; height: 8px; }
+      .synapse-1, .synapse-3, .synapse-5, .synapse-7 { height: 70px; transform: translate(-50%, -50px) rotate(var(--r, 0deg)); }
+      .synapse-2, .synapse-4, .synapse-6, .synapse-8 { height: 90px; transform: translate(-50%, -50px) rotate(var(--r, 0deg)); }
+      .hero-title { font-size: 36px; }
+      .hero-subtitle { font-size: 17px; }
+      .hero-cta { padding: 16px 28px; font-size: 16px; }
+      .container { gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="grid-bg"></div>
+    <div class="scanlines"></div>
+
+    <!-- Neural network canvas for connections -->
+    <canvas id="neural-canvas" class="neural-canvas"></canvas>
+
+    <div class="container">
+      <!-- Neural Core Visual -->
+      <div class="neural-core">
+        <!-- Synaptic connections -->
+        <div class="synapse synapse-1"></div>
+        <div class="synapse synapse-2"></div>
+        <div class="synapse synapse-3"></div>
+        <div class="synapse synapse-4"></div>
+        <div class="synapse synapse-5"></div>
+        <div class="synapse synapse-6"></div>
+        <div class="synapse synapse-7"></div>
+        <div class="synapse synapse-8"></div>
+
+        <!-- Orbits with neurons -->
+        <div class="orbit orbit-3">
+          <div class="neuron"></div>
+          <div class="neuron"></div>
+          <div class="neuron"></div>
+          <div class="neuron"></div>
+          <div class="neuron"></div>
+        </div>
+        <div class="orbit orbit-2">
+          <div class="neuron"></div>
+          <div class="neuron"></div>
+          <div class="neuron"></div>
+          <div class="neuron"></div>
+        </div>
+        <div class="orbit orbit-1">
+          <div class="neuron"></div>
+          <div class="neuron"></div>
+          <div class="neuron"></div>
+        </div>
+
+        <!-- Brain core -->
+        <div class="brain-orb"></div>
+        <div class="inner-core"></div>
+      </div>
+
+      <!-- Text Content -->
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Your <span class="hero-title-accent">AI Marketing</span> Agent
+        </h1>
+        <p class="hero-subtitle">
+          WOM runs creator campaigns on autopilot—from outreach to payment, 24/7.
+        </p>
+        <a href="https://wom.live/login" class="hero-cta">
+          Get Started
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Neural network particle connections
+    (function() {
+      const canvas = document.getElementById('neural-canvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let mouse = { x: null, y: null };
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initParticles();
+      }
+
+      function initParticles() {
+        particles = [];
+        const count = Math.min(80, Math.floor(canvas.width / 20));
+        
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            size: 2 + Math.random() * 2,
+            alpha: 0.3 + Math.random() * 0.4,
+            pulseSpeed: 0.02 + Math.random() * 0.02,
+            pulsePhase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const maxDist = 200;
+
+        particles.forEach((p, i) => {
+          // Update pulse
+          p.pulsePhase += p.pulseSpeed;
+          const pulse = 0.5 + 0.5 * Math.sin(p.pulsePhase);
+
+          // Move
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Bounce off edges
+          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+          // Gentle attraction to center
+          const dx = centerX - p.x;
+          const dy = centerY - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist > canvas.height * 0.4) {
+            p.vx += dx * 0.00005;
+            p.vy += dy * 0.00005;
+          }
+
+          // Damping
+          p.vx *= 0.999;
+          p.vy *= 0.999;
+
+          // Draw particle
+          const size = p.size * (0.8 + pulse * 0.4);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 212, 255, ${p.alpha * pulse})`;
+          ctx.fill();
+
+          // Draw connections
+          particles.forEach((p2, j) => {
+            if (i >= j) return;
+            const dx2 = p.x - p2.x;
+            const dy2 = p.y - p2.y;
+            const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+            
+            if (dist2 < 120) {
+              const alpha = 0.15 * (1 - dist2 / 120) * pulse;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(0, 212, 255, ${alpha})`;
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          });
+        });
+
+        requestAnimationFrame(animate);
+      }
+
+      resize();
+      animate();
+      window.addEventListener('resize', resize);
+
+      // Mouse interaction
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+    })();
+  </script>
+</body>
+</html>
