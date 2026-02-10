@@ -119,33 +119,31 @@ const styles: Record<string, CSSProperties> = {
     border: '2px solid var(--border)',
   },
   statsSection: {
-    background: 'white',
-    padding: '60px 0',
-    borderTop: '1px solid var(--border)',
+    background: 'var(--navy)',
+    padding: '60px 24px',
   },
   statsContainer: {
-    maxWidth: 800,
+    maxWidth: 1000,
     margin: '0 auto',
-    padding: '40px 60px',
   },
   stats: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
     gap: 40,
   },
   stat: {
     textAlign: 'center',
-    flex: 1,
   },
   statValue: {
-    fontSize: 40,
-    fontWeight: 700,
-    color: 'var(--navy)',
+    fontSize: '3rem',
+    fontWeight: 800,
+    color: 'var(--coral)',
   },
   statLabel: {
-    fontSize: 14,
-    color: 'var(--text-secondary)',
-    marginTop: 6,
+    fontSize: '1rem',
+    color: 'rgba(255,255,255,0.8)',
+    marginTop: 8,
   },
   section: {
     padding: '100px 0',
@@ -172,30 +170,31 @@ const styles: Record<string, CSSProperties> = {
   steps: {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: 32,
+    gap: 40,
   },
   step: {
+    textAlign: 'center',
+    padding: '40px 24px',
     background: 'white',
-    borderRadius: 20,
-    padding: '40px 32px',
-    border: '1px solid var(--border)',
+    borderRadius: 16,
+    boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
     transition: 'all 0.3s',
   },
   stepNumber: {
     width: 48,
     height: 48,
-    background: 'var(--coral-light)',
-    borderRadius: 12,
+    background: 'var(--coral)',
+    color: 'white',
+    borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: 20,
     fontWeight: 700,
-    color: 'var(--navy)',
-    marginBottom: 24,
+    fontSize: '1.25rem',
+    margin: '0 auto 20px',
   },
   stepH3: {
-    fontSize: 20,
+    fontSize: '1.25rem',
     fontWeight: 600,
     marginBottom: 12,
   },
@@ -396,7 +395,7 @@ export default function LandingPage() {
         .nav-cta:hover { background: var(--navy-light) !important; }
         .btn-primary:hover { background: var(--navy-light) !important; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30, 58, 95, 0.2); }
         .btn-secondary:hover { border-color: var(--coral) !important; background: var(--cream) !important; }
-        .step:hover { border-color: var(--coral) !important; transform: translateY(-4px); box-shadow: 0 12px 32px rgba(232, 168, 124, 0.15); }
+        .step:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(232, 168, 124, 0.15); }
         .cta-btn:hover { background: #D4956A !important; }
         .footer-link:hover { color: var(--navy) !important; }
       `}</style>
