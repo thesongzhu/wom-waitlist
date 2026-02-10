@@ -459,7 +459,7 @@ export default function LandingPage() {
             <div style={styles.step} className="step">
               <div style={styles.stepNumber}>3</div>
               <h3 style={styles.stepH3}>Track & Iterate</h3>
-              <p style={styles.stepP}>Every campaign produces structured outcomes data. WOM learns and improves matching, messaging, and execution each cycle.</p>
+              <p style={styles.stepP}>Every campaign produces structured data. WOM learns and improves matching, messaging, and execution.</p>
             </div>
           </div>
         </div>
