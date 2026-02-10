@@ -10,7 +10,7 @@ export function HeroAgent() {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
+          background: linear-gradient(180deg, #FEFDFB 0%, #F5F3F0 100%);
           position: relative;
           overflow: hidden;
           padding: 60px 24px;
@@ -38,7 +38,7 @@ export function HeroAgent() {
           position: absolute;
           width: 6px;
           height: 6px;
-          background: var(--coral);
+          background: #E8A87C;
           border-radius: 50%;
           animation: fade 4s ease-in-out infinite;
         }
@@ -101,7 +101,7 @@ export function HeroAgent() {
         .orb {
           width: 160px;
           height: 160px;
-          background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+          background: linear-gradient(135deg, #1E3A5F 0%, #162C49 100%);
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -130,7 +130,7 @@ export function HeroAgent() {
         .icon {
           width: 56px;
           height: 56px;
-          color: var(--coral);
+          color: #E8A87C;
           animation: icon-breathe 6s ease-in-out infinite;
         }
 
@@ -166,7 +166,7 @@ export function HeroAgent() {
 
         .subtitle {
           font-size: 1.25rem;
-          color: var(--text-secondary);
+          color: #6B7A90;
           margin-bottom: 32px;
           line-height: 1.7;
         }
@@ -175,7 +175,7 @@ export function HeroAgent() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          background: var(--navy);
+          background: #1E3A5F;
           color: white;
           padding: 18px 36px;
           border-radius: 12px;
@@ -192,7 +192,7 @@ export function HeroAgent() {
         .scroll-indicator {
           position: absolute;
           bottom: 30px;
-          color: var(--text-secondary);
+          color: #6B7A90;
           font-size: 0.875rem;
           display: flex;
           flex-direction: column;
