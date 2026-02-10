@@ -91,15 +91,15 @@ export function HeroAgent() {
           margin-bottom: 48px;
         }
 
-        .ring {
+        .hero-ring {
           position: absolute;
           border-radius: 50%;
           border: 1.5px solid rgba(232, 168, 124, 0.25);
           animation: ring-pulse 6s ease-in-out infinite;
         }
-        .ring-1 { width: 220px; height: 220px; }
-        .ring-2 { width: 280px; height: 280px; animation-delay: 0.5s; border-color: rgba(232, 168, 124, 0.15); }
-        .ring-3 { width: 340px; height: 340px; animation-delay: 1s; border-color: rgba(232, 168, 124, 0.1); }
+        .hero-ring-1 { width: 220px; height: 220px; }
+        .hero-ring-2 { width: 280px; height: 280px; animation-delay: 0.5s; border-color: rgba(232, 168, 124, 0.15); }
+        .hero-ring-3 { width: 340px; height: 340px; animation-delay: 1s; border-color: rgba(232, 168, 124, 0.1); }
 
         @keyframes ring-pulse {
           0%, 100% { transform: scale(1); opacity: 1; }
@@ -216,9 +216,9 @@ export function HeroAgent() {
         @media (max-width: 768px) {
           .orb { width: 120px; height: 120px; }
           .icon { width: 44px; height: 44px; }
-          .ring-1 { width: 180px; height: 180px; }
-          .ring-2 { width: 230px; height: 230px; }
-          .ring-3 { width: 280px; height: 280px; }
+          .hero-ring-1 { width: 180px; height: 180px; }
+          .hero-ring-2 { width: 230px; height: 230px; }
+          .hero-ring-3 { width: 280px; height: 280px; }
           .agent-visual { width: 240px; height: 240px; }
         }
       `}</style>
@@ -245,9 +245,9 @@ export function HeroAgent() {
 
         <div className="agent-container">
           <div className="agent-visual">
-            <div className="ring ring-1" style={{borderColor: 'rgba(232, 168, 124, 0.25)'}}></div>
-            <div className="ring ring-2" style={{borderColor: 'rgba(232, 168, 124, 0.15)'}}></div>
-            <div className="ring ring-3" style={{borderColor: 'rgba(232, 168, 124, 0.1)'}}></div>
+            <div className="hero-ring hero-ring-1" style={{borderColor: 'rgba(232, 168, 124, 0.25)'}}></div>
+            <div className="hero-ring hero-ring-2" style={{borderColor: 'rgba(232, 168, 124, 0.15)'}}></div>
+            <div className="hero-ring hero-ring-3" style={{borderColor: 'rgba(232, 168, 124, 0.1)'}}></div>
             <div className="orb">
               <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="11" width="18" height="10" rx="2"/>
