@@ -1,6 +1,7 @@
 'use client'
 
 import { CSSProperties } from 'react'
+import { HeroAgent } from '@/components/hero-agent'
 
 const styles: Record<string, CSSProperties> = {
   container: {
@@ -414,25 +415,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero */}
-      <section style={styles.hero}>
-        <div style={styles.container}>
-          <div style={styles.heroBadge}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            AI-Native Creator Marketing
-          </div>
-          <h1 style={styles.heroH1} className="hero-title">
-            Run creator campaigns on <span style={styles.heroHighlight}>autopilot</span>
-          </h1>
-          <p style={styles.heroP}>WOM handles outreach, terms, contracting, tracking, and iteration—so campaigns run repeatedly without spreadsheets or agencies.</p>
-          <div style={styles.heroCta}>
-            <a href="https://wom.live/login" style={{...styles.btn, ...styles.btnPrimary}} className="btn-primary">
-              Start Free Trial
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="#how-it-works" style={{...styles.btn, ...styles.btnSecondary}} className="btn-secondary">See How It Works</a>
-          </div>
-        </div>
-      </section>
+      <HeroAgent />
 
       {/* Stats Section */}
       <section style={styles.statsSection}>
